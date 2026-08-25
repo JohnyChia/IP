@@ -1,0 +1,11 @@
+image_name,algorithm,processing_time_s,gt_count,prediction_count,tp,fp,fn,precision,recall,f1,mean_matched_iou,mean_prediction_overlap,mask_area_px,foreground_ratio,contour_count,largest_contour_area
+000d9c59687b509b_jpg.rf.c338360b3dfe1953a5d266ee861d7e79.jpg,Color Thresholding,0.0151,3,5,0,5,3,0.0,0.0,0.0,0.0,0.0679,46894,0.3978,5,55164.5
+000d9c59687b509b_jpg.rf.c338360b3dfe1953a5d266ee861d7e79.jpg,LAB K-Means,0.1777,3,28,0,28,3,0.0,0.0,0.0,0.0,0.0271,29333,0.2489,28,16721.5
+0026df6bcaf93ac5_jpg.rf.510f06f5d706b8924f3a8a411211dcf8.jpg,Color Thresholding,0.0136,2,8,0,8,2,0.0,0.0,0.0,0.0,0.0288,29213,0.231,8,27767.5
+0026df6bcaf93ac5_jpg.rf.510f06f5d706b8924f3a8a411211dcf8.jpg,LAB K-Means,0.1674,2,6,0,6,2,0.0,0.0,0.0,0.0,0.0601,61316,0.4848,6,60936.0
+0048a9ad59d8ab79_jpg.rf.8a324bb752732a70e2bc846b44c96d19.jpg,Color Thresholding,0.0096,2,5,0,5,2,0.0,0.0,0.0,0.0,0.0349,32929,0.5427,5,33445.0
+0048a9ad59d8ab79_jpg.rf.8a324bb752732a70e2bc846b44c96d19.jpg,LAB K-Means,0.0784,2,5,0,5,2,0.0,0.0,0.0,0.0,0.048,21407,0.3528,6,19744.5
+0055f7e5bac0c8e1_jpg.rf.7bb1d953a097322150e11573b6e58e65.jpg,Color Thresholding,0.0122,2,4,0,4,2,0.0,0.0,0.0,0.0,0.0685,96430,0.8596,4,95735.0
+0055f7e5bac0c8e1_jpg.rf.7bb1d953a097322150e11573b6e58e65.jpg,LAB K-Means,0.1608,2,1,0,1,2,0.0,0.0,0.0,0.0,0.3319,53657,0.4783,1,53115.0
+00568c421d1592fa_jpg.rf.0d1f5010cce3b13ee245a6c5d616bf2a.jpg,Color Thresholding,0.0257,3,3,0,3,3,0.0,0.0,0.0,0.0,0.0955,27376,0.2333,3,26385.0
+00568c421d1592fa_jpg.rf.0d1f5010cce3b13ee245a6c5d616bf2a.jpg,LAB K-Means,0.1686,3,6,0,6,3,0.0,0.0,0.0,0.0,0.0499,36670,0.3126,6,34089.5

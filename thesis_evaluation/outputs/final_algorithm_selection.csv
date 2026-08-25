@@ -1,0 +1,5 @@
+module,situation,algorithm,selection_status,primary_reason,quality_metric,time_metric,limitation
+Surface Detection,Situation 1,LAB K-Means,SELECTED,Highest average prediction overlap despite potential speed trade-offs.,Prediction Overlap,processing_time_s,F1 = INVALID_FOR_SELECTION (TP=0 due to bounding box GT vs mask mismatch)
+Surface Detection,Situation 2,Morphological Watershed,SELECTED,Significantly higher mask overlap and cohesive regions than pure edge detection.,Prediction Overlap,processing_time_s,F1 = INVALID_FOR_SELECTION
+Surface Detection,Situation 3,Active Contour,SELECTED,Provides global shape descriptors successfully.,Shape Descriptors,processing_time_s,No pixel-level GT for geometric accuracy validation
+Fruit Ripeness,HSV vs LAB,Both,NO_FINAL_SELECTION,No ground truth ripeness labels to validate predictive superiority.,NO_GROUND_TRUTH,processing_time_s,Lack of ripeness classes in benchmark prevents empirical selection.

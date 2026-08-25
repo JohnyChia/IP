@@ -1,0 +1,11 @@
+image_name,algorithm,processing_time_s,gt_count,prediction_count,tp,fp,fn,precision,recall,f1,mean_matched_iou,mean_prediction_overlap,edge_area_px,edge_density,boundary_area,contour_count
+000d9c59687b509b_jpg.rf.c338360b3dfe1953a5d266ee861d7e79.jpg,Canny Edge Detection,0.0138,3,115,0,115,3,0.0,0.0,0.0,0.0,0.0086,7311,0.062,6569.0,150
+000d9c59687b509b_jpg.rf.c338360b3dfe1953a5d266ee861d7e79.jpg,Morphological Watershed,0.0142,3,1,0,1,3,0.0,0.0,0.0,0.0,0.2878,1376,0.0117,117180.0,1
+0026df6bcaf93ac5_jpg.rf.510f06f5d706b8924f3a8a411211dcf8.jpg,Canny Edge Detection,0.0043,2,24,0,24,2,0.0,0.0,0.0,0.0,0.0007,1250,0.0099,925.5,42
+0026df6bcaf93ac5_jpg.rf.510f06f5d706b8924f3a8a411211dcf8.jpg,Morphological Watershed,0.0113,2,1,0,1,2,0.0,0.0,0.0,0.0,0.309,1432,0.0113,125763.0,1
+0048a9ad59d8ab79_jpg.rf.8a324bb752732a70e2bc846b44c96d19.jpg,Canny Edge Detection,0.0032,2,42,0,42,2,0.0,0.0,0.0,0.0,0.0076,2299,0.0379,1582.5,71
+0048a9ad59d8ab79_jpg.rf.8a324bb752732a70e2bc846b44c96d19.jpg,Morphological Watershed,0.0088,2,1,0,1,2,0.0,0.0,0.0,0.0,0.1481,982,0.0162,60180.0,1
+0055f7e5bac0c8e1_jpg.rf.7bb1d953a097322150e11573b6e58e65.jpg,Canny Edge Detection,0.0044,2,8,0,8,2,0.0,0.0,0.0,0.0,0.026,513,0.0046,341.5,13
+0055f7e5bac0c8e1_jpg.rf.7bb1d953a097322150e11573b6e58e65.jpg,Morphological Watershed,0.0099,2,1,0,1,2,0.0,0.0,0.0,0.0,0.2739,1354,0.0121,111502.0,1
+00568c421d1592fa_jpg.rf.0d1f5010cce3b13ee245a6c5d616bf2a.jpg,Canny Edge Detection,0.0036,3,6,0,6,3,0.0,0.0,0.0,0.0,0.0407,595,0.0051,331.5,10
+00568c421d1592fa_jpg.rf.0d1f5010cce3b13ee245a6c5d616bf2a.jpg,Morphological Watershed,0.0104,3,1,0,1,3,0.0,0.0,0.0,0.0,0.2866,1368,0.0117,116640.0,1

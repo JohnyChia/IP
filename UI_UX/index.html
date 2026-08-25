@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Fruit Inspection System - New Inspection</title>
+    <link href="css/font-face.css" rel="stylesheet" media="all"/>
+    <link rel="preconnect" href="https://rsms.me/"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link href="vendor/fontawesome-7.3.1/css/all.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/bootstrap-5.3.8.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all"/>
+    <link href="css/theme.css" rel="stylesheet" media="all"/>
+    <link href="css/app.css" rel="stylesheet" media="all"/>
+    <style>
+      .upload-area {
+          border: 2px dashed #4272d7;
+          border-radius: 8px;
+          padding: 60px;
+          text-align: center;
+          background: #f8f9fa;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+      .upload-area:hover {
+          background: #e9ecef;
+      }
+      .upload-icon {
+          font-size: 56px;
+          color: #4272d7;
+          margin-bottom: 20px;
+      }
+      #processing-section, #results-section {
+          display: none;
+      }
+      .processing-step {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          font-size: 16px;
+      }
+      .processing-step i {
+          margin-right: 15px;
+          font-size: 20px;
+          width: 24px;
+          text-align: center;
+      }
+    </style>
+  </head>
+  <body class="app">
+    <div class="page-wrapper">
+      
+      
+      <aside class="menu-sidebar" id="main-sidebar">
+        <div class="logo">
+            <a class="logo-link" href="index.html">
+                <span class="logo-mark" aria-hidden="true" style="background: #4272d7; color: white; border-radius: 4px; padding: 0 8px;"><i class="fa-solid fa-apple-whole"></i></span>
+                <span class="logo-text">Inspection System</span>
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+                    <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-list-check"></i>INSPECTION
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-index"><a href="index.html">New Inspection</a></li>
+                  </ul>
+              </li>
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-chart-pie"></i>ANALYSIS
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-surface"><a href="surface.html">Fruit Surface Detection</a></li>
+                      <li id="nav-ripeness"><a href="ripeness.html">Fruit Ripeness</a></li>
+                  </ul>
+              </li>
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-square-poll-vertical"></i>RESULTS
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-viz"><a href="visualization.html">Visualization Dashboard</a></li>
+                  </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      
+      
+      <div class="page-container">
+        
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <div class="form-header">
+                    <h4>Fruit Inspection System Dashboard</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        
+        <main class="main-content" id="main-content">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              
+              <div class="page-header">
+                  <div>
+                      <h1>New Inspection</h1>
+                      <p class="subtitle">Upload one fruit image to begin the automated inspection pipeline.</p>
+                  </div>
+              </div>
+
+              
+              <div class="row" id="upload-section">
+                  <div class="col-md-10 mx-auto">
+                      <div class="m-card">
+                          <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()">
+                              <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                              <h3>Drag and drop a fruit image or video here</h3>
+                              <p class="text-muted mt-2">or click to browse</p>
+                              <p class="text-danger fw-bold mt-3">Upload ONE fruit image or video (JPG, PNG, MP4, AVI)</p>
+                              <input type="file" id="file-input" style="display: none;" accept="image/png, image/jpeg, image/jpg, video/mp4, video/avi, video/quicktime, video/webm">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              
+              <div class="row" id="processing-section" style="margin-top: 20px;">
+                  <div class="col-md-8 mx-auto">
+                      <div class="m-card text-center" style="padding: 60px 20px;">
+                          <div id="loading-spinner">
+                              <i class="fa-solid fa-circle-notch fa-spin text-primary" style="font-size: 56px; margin-bottom: 20px;"></i>
+                              <h2 class="m-card__title">Processing Fruit...</h2>
+                              <div class="text-start d-inline-block mt-4" style="text-align: left;">
+                                  <div class="processing-step"><i class="fa-solid fa-rotate text-primary fa-spin"></i> Validating Image</div>
+                                  <div class="processing-step"><i class="fa-solid fa-rotate text-primary fa-spin"></i> Surface Detection</div>
+                                  <div class="processing-step"><i class="fa-solid fa-rotate text-primary fa-spin"></i> Ripeness Analysis</div>
+                                  <div class="processing-step"><i class="fa-solid fa-rotate text-primary fa-spin"></i> Generating Results</div>
+                              </div>
+                          </div>
+                          
+                          
+                          <div id="validation-error" style="display:none; text-align: left;">
+                              <div class="alert alert-danger">
+                                  <h4 class="alert-heading"><i class="fa-solid fa-triangle-exclamation"></i> Invalid Image</h4>
+                                  <p>This image does not appear to contain a fruit. Please upload a valid fruit image.</p>
+                                  <hr>
+                                  <p class="mb-0 small">(Note: AI Object Detection is required for true validation in production).</p>
+                              </div>
+                              <button class="btn btn-primary mt-3" onclick="resetUpload()">Try Again</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              
+              <div id="results-section" style="margin-top: 20px;">
+                  <div class="row">
+                      <div class="col-md-10 mx-auto text-center">
+                          <h2 class="mb-4 text-success"><i class="fa-solid fa-circle-check"></i> Processing Completed!</h2>
+                          <p class="text-muted mb-4">The inspection results have been generated. Please select a module from the left sidebar to view the details.</p>
+                          <div class="d-flex justify-content-center gap-4">
+                              <p class="text-success"><i class="fa-solid fa-arrow-left"></i> Use the Sidebar Menu to navigate</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              
+              <div class="row" style="margin-top: 28px;">
+                  <div class="col-md-12">
+                      <div class="copyright">
+                          <p>Fruit Inspection System Prototype &copy; 2026</p>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    
+    <script>
+      const fileInput = document.getElementById('file-input');
+      const dropZone = document.getElementById('drop-zone');
+      
+      const uploadSec = document.getElementById('upload-section');
+      const processSec = document.getElementById('processing-section');
+      const resultSec = document.getElementById('results-section');
+      const workflowSteps = document.getElementById('workflow-steps');
+      const validationError = document.getElementById('validation-error');
+
+      // Drag and Drop
+      dropZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropZone.style.background = '#e9ecef';
+      });
+      dropZone.addEventListener('dragleave', (e) => {
+          e.preventDefault();
+          dropZone.style.background = '#f8f9fa';
+      });
+      dropZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropZone.style.background = '#f8f9fa';
+          if (e.dataTransfer.files.length > 1) {
+              alert("Error: Please upload ONLY ONE fruit image.");
+              return;
+          }
+          handleFile(e.dataTransfer.files[0]);
+      });
+
+      fileInput.addEventListener('change', (e) => {
+          if (e.target.files.length > 1) {
+              alert("Error: Please upload ONLY ONE fruit image.");
+              fileInput.value = '';
+              return;
+          }
+          if (e.target.files.length === 1) {
+              handleFile(e.target.files[0]);
+          }
+      });
+
+      function handleFile(file) {
+          const fileName = file.name.toLowerCase();
+          const fileType = file.type;
+          
+          const isImage = fileType.startsWith('image/') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png');
+          const isVideo = fileType.startsWith('video/') || fileType === 'application/octet-stream' || fileName.endsWith('.mp4') || fileName.endsWith('.avi') || fileName.endsWith('.mov') || fileName.endsWith('.webm');
+          
+          if (!isImage && !isVideo) {
+              alert("Please upload a JPG, JPEG, PNG image, or MP4 video.");
+              return;
+          }
+          
+          // Avoid reading huge videos into memory via DataURL.
+          // We can just pass the file to runWorkflow and read the image only if it's an image.
+          if (isImage) {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                  localStorage.setItem('inspection_image', e.target.result);
+                  runWorkflow(file);
+              };
+              reader.readAsDataURL(file);
+          } else {
+              // Video doesn't need to be saved to localStorage
+              runWorkflow(file);
+          }
+      }
+      
+      function resetUpload() {
+          fileInput.value = '';
+          uploadSec.style.display = 'block';
+          processSec.style.display = 'none';
+          resultSec.style.display = 'none';
+          validationError.style.display = 'none';
+          localStorage.removeItem('inspection_image');
+      }
+
+      async function runWorkflow(file) {
+            uploadSec.style.display = 'none';
+            processSec.style.display = 'block';
+            document.getElementById('loading-spinner').style.display = 'block';
+            validationError.style.display = 'none';
+            
+            if (!file) {
+                return;
+            }
+            
+            const fileName = file.name.toLowerCase();
+            const fileType = file.type;
+            const isVideo = fileType.startsWith('video/') || fileType === 'application/octet-stream' || fileName.endsWith('.mp4') || fileName.endsWith('.avi') || fileName.endsWith('.mov') || fileName.endsWith('.webm');
+            const isImage = fileType.startsWith('image/') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png');
+            
+            if (!isImage && !isVideo) {
+                alert("Please upload a JPG, JPEG, PNG image, or MP4 video.");
+                resetUpload();
+                return;
+            }
+  
+            const formData = new FormData();
+            const endpoint = isVideo ? 'http://127.0.0.1:5050/api/inspect_video' : 'http://127.0.0.1:5050/api/inspect';
+            formData.append(isVideo ? 'video' : 'image', file);
+            
+            if (isVideo) {
+                const spinnerText = document.createElement('p');
+                spinnerText.style.color = '#666';
+                spinnerText.style.fontSize = '0.9rem';
+                spinnerText.style.marginTop = '10px';
+                spinnerText.innerHTML = 'Sampling and processing video frames...<br>This may take a minute depending on video length.';
+                document.getElementById('loading-spinner').appendChild(spinnerText);
+            }
+  
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                
+                if (data.success === false || data.error) {
+                    // Not a fruit or invalid image
+                    document.getElementById('loading-spinner').style.display = 'none';
+                    validationError.style.display = 'block';
+                    if (data.error) {
+                        validationError.innerHTML = '<div class="alert alert-danger"><h4 class="alert-heading"><i class="fa-solid fa-triangle-exclamation"></i> Error</h4><p>' + data.error + '</p></div><button class="btn btn-primary mt-3" onclick="resetUpload()">Try Again</button>';
+                    }
+                    return;
+                }
+                
+                // Store in local storage for other pages
+                localStorage.setItem('inspection_results', JSON.stringify(data));
+                
+                // Simulate processing delay for UI/UX
+                setTimeout(() => {
+                    document.getElementById('loading-spinner').style.display = 'none';
+                    document.getElementById('success-message').style.display = 'block';
+                    // Automatically route to surface detection
+                    setTimeout(() => {
+                        window.location.href = "surface.html";
+                    }, 500);
+                }, 800);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading-spinner').style.display = 'none';
+                validationError.style.display = 'block';
+                validationError.innerHTML = '<div class="alert alert-danger"><h4 class="alert-heading"><i class="fa-solid fa-server"></i> Server Error</h4><p>Failed to connect to the Python backend. Ensure app.py is running.</p></div><button class="btn btn-primary mt-3" onclick="resetUpload()">Try Again</button>';
+            }
+        }
+    </script>
+    <script src="js/vanilla-utils.js"></script>
+    <script src="vendor/bootstrap-5.3.8.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+Module,Situation,Algorithm,Metric,Result,Selected,Reason,Limitation
+Surface Detection,Situation 1,Color Thresholding,Prediction Overlap,0.05911999999999999,No,Lower overlap,TP=0 (Bounding Box GT)
+Surface Detection,Situation 1,Color Thresholding,Processing Time (s),0.01524,No,Lower overlap,TP=0 (Bounding Box GT)
+Surface Detection,Situation 1,LAB K-Means,Prediction Overlap,0.10339999999999998,Yes,Highest prediction overlap,TP=0 (Bounding Box GT)
+Surface Detection,Situation 1,LAB K-Means,Processing Time (s),0.15058,Yes,Highest prediction overlap,TP=0 (Bounding Box GT)
+Surface Detection,Situation 2,Canny Edge Detection,Prediction Overlap,0.01672,No,Edge fragmentations,TP=0 (Bounding Box GT)
+Surface Detection,Situation 2,Canny Edge Detection,Processing Time (s),0.00586,No,Edge fragmentations,TP=0 (Bounding Box GT)
+Surface Detection,Situation 2,Morphological Watershed,Prediction Overlap,0.26108,Yes,Much higher overlap + fewer fragmented predictions,TP=0 (Bounding Box GT)
+Surface Detection,Situation 2,Morphological Watershed,Processing Time (s),0.010920000000000001,Yes,Much higher overlap + fewer fragmented predictions,TP=0 (Bounding Box GT)
+Surface Detection,Situation 3,Global Shape Descriptors,Circularity,0.19319999999999998,Yes,Better shape representation,No pixel-level GT
+Surface Detection,Situation 3,Global Shape Descriptors,Processing Time (s),0.0013600000000000003,Yes,Better shape representation,No pixel-level GT
+Surface Detection,Situation 3,Active Contour,Circularity,0.45442,Yes,Better shape representation,No pixel-level GT
+Surface Detection,Situation 3,Active Contour,Processing Time (s),1.57506,Yes,Better shape representation,No pixel-level GT
+Fruit Ripeness,HSV vs LAB,HSV,Processing Time (s),0.0025599999999999998,No Final Selection,No GT ripeness labels available,Unsupervised
+Fruit Ripeness,HSV vs LAB,LAB,Processing Time (s),0.005360000000000001,No Final Selection,No GT ripeness labels available,Unsupervised

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Fruit Ripeness</title>
+    <link href="css/font-face.css" rel="stylesheet" media="all"/>
+    <link rel="preconnect" href="https://rsms.me/"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link href="vendor/fontawesome-7.3.1/css/all.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/bootstrap-5.3.8.min.css" rel="stylesheet" media="all"/>
+    <link href="css/theme.css" rel="stylesheet" media="all"/>
+    <link href="css/app.css" rel="stylesheet" media="all"/>
+</head>
+<body class="app">
+    <div class="page-wrapper">
+        
+        <aside class="menu-sidebar" id="main-sidebar">
+          <div class="logo">
+              <a class="logo-link" href="index.html">
+                  <span class="logo-mark" aria-hidden="true" style="background: #4272d7; color: white; border-radius: 4px; padding: 0 8px;"><i class="fa-solid fa-apple-whole"></i></span>
+                  <span class="logo-text">Inspection System</span>
+              </a>
+          </div>
+          <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+              <ul class="list-unstyled navbar__list">
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-list-check"></i>INSPECTION
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-index"><a href="index.html">New Inspection</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-chart-pie"></i>ANALYSIS
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-surface"><a href="surface.html">Fruit Surface Detection</a></li>
+                        <li id="nav-ripeness" class="active"><a href="ripeness.html">Fruit Ripeness</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-square-poll-vertical"></i>RESULTS
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-viz"><a href="visualization.html">Visualization Dashboard</a></li>
+                    </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        
+        <div class="page-container">
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <div class="form-header">
+                                <h4>Fruit Inspection System Dashboard</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content" id="main-content">
+              <div class="section__content section__content--p30">
+                  <div class="container-fluid">
+                      <div class="page-header">
+                          <div>
+                              <h1>Fruit Ripeness Assessment</h1>
+                              <p class="subtitle">Comparing color spaces for ripeness classification.</p>
+                          </div>
+                      </div>
+                      
+                      
+                      <div class="row mb-4">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-body d-flex align-items-center justify-content-between">
+                                      <h4 class="mb-0">Select Ripeness Situation:</h4>
+                                      <select class="form-select w-50" id="situation-select">
+                                          <option value="sit1">Situation 1 (Fruits with Obvious Colour Changes During Ripening)</option>
+                                          <option value="sit2">Situation 2 (Controlled Lighting Conditions)</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      
+                      <div class="row">
+                          <div class="col-md-8 mx-auto mb-4">
+                        <div id="video-controls" class="alert alert-info d-flex justify-content-between align-items-center" style="display: none !important; margin-bottom: 20px;">
+                            <div>
+                                <strong><i class="fa-solid fa-film"></i> Video Processing Results</strong>
+                                <p class="mb-0" style="font-size: 0.9em;">Displaying sampled frames from the uploaded video.</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <button id="btn-prev-frame" class="btn btn-sm btn-outline-primary me-2"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                                <span id="frame-indicator" class="fw-bold me-2">Frame 1 of 1</span>
+                                <button id="btn-next-frame" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-chevron-right"></i> Next</button>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                          <div class="col-md-8 mx-auto mb-4">
+                              <div class="m-card text-center">
+                                  <header class="m-card__header" style="justify-content: center;">
+                                      <h5 class="m-card__title">Original Image</h5>
+                                  </header>
+                                  <img id="original-img" class="preview-image mt-3 mb-3" src="">
+                              </div>
+                          </div>
+                      </div>
+                      
+                      
+                      <div class="text-center mt-4 mb-3">
+                          <h5 class="text-muted">--- Original Algorithms ---</h5>
+                      </div>
+                      
+                      <div class="row mt-4">
+                          <div class="col-md-6">
+                              <div class="m-card text-center" style="border-top: 4px solid #4272d7; height: 100%;">
+                                  <header class="m-card__header" style="justify-content: center;">
+                                      <h5 class="m-card__title"><i class="fa-solid fa-circle" style="color:#4272d7; font-size: 0.8rem; margin-right: 5px;"></i> LAB (CIELAB) Algorithm (Original)</h5>
+                                  </header>
+                                  <img id="orig-lab-img" class="preview-image mt-3 mb-3" src="">
+                                  <p class="text-muted small" id="orig-lab-text">Loading...</p>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="m-card text-center" style="border-top: 4px solid #28a745; height: 100%;">
+                                  <header class="m-card__header" style="justify-content: center;">
+                                      <h5 class="m-card__title"><i class="fa-solid fa-circle" style="color:#28a745; font-size: 0.8rem; margin-right: 5px;"></i> HSV Algorithm (Original)</h5>
+                                  </header>
+                                  <img id="orig-hsv-img" class="preview-image mt-3 mb-3" src="">
+                                  <p class="text-muted small" id="orig-hsv-text">Loading...</p>
+                              </div>
+                          </div>
+                      </div>
+
+                      
+                      <div class="text-center mt-5 mb-3">
+                          <h5 class="text-muted">--- Result Enhancement ---</h5>
+                      </div>
+                      
+                      <div class="row mt-4 mb-5">
+                          <div class="col-md-6">
+                              <div class="m-card text-center" style="border-top: 4px solid #4272d7; height: 100%;">
+                                  <header class="m-card__header" style="justify-content: center;">
+                                      <h5 class="m-card__title"><i class="fa-solid fa-circle" style="color:#4272d7; font-size: 0.8rem; margin-right: 5px;"></i> LAB (CIELAB) Algorithm (Enhanced)</h5>
+                                  </header>
+                                  <img id="enh-lab-img" class="preview-image mt-3 mb-3" src="">
+                                  <p class="text-muted small" id="enh-lab-text">Loading...</p>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="m-card text-center" style="border-top: 4px solid #28a745; height: 100%;">
+                                  <header class="m-card__header" style="justify-content: center;">
+                                      <h5 class="m-card__title"><i class="fa-solid fa-circle" style="color:#28a745; font-size: 0.8rem; margin-right: 5px;"></i> HSV Algorithm (Enhanced)</h5>
+                                  </header>
+                                  <img id="enh-hsv-img" class="preview-image mt-3 mb-3" src="">
+                                  <p class="text-muted small" id="enh-hsv-text">Loading...</p>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="js/main-vanilla.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rawData = localStorage.getItem('inspection_results');
+            
+            if (!rawData) {
+                alert("Please perform an inspection first.");
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const parsedData = JSON.parse(rawData);
+            let frames = [];
+            
+            if (parsedData.is_video) {
+                frames = parsedData.frames;
+                document.getElementById('video-controls').style.setProperty('display', 'flex', 'important');
+            } else {
+                frames = [parsedData];
+            }
+            
+            let currentFrameIndex = 0;
+            
+            const sitSelect = document.getElementById('situation-select');
+            
+            const origLabImg = document.getElementById('orig-lab-img');
+            const origHsvImg = document.getElementById('orig-hsv-img');
+            const enhLabImg = document.getElementById('enh-lab-img');
+            const enhHsvImg = document.getElementById('enh-hsv-img');
+            
+            const origLabText = document.getElementById('orig-lab-text');
+            const origHsvText = document.getElementById('orig-hsv-text');
+            const enhLabText = document.getElementById('enh-lab-text');
+            const enhHsvText = document.getElementById('enh-hsv-text');
+            
+            function renderFrame(index) {
+                currentFrameIndex = index;
+                const data = frames[index];
+                const ripenessData = data.ripeness;
+                
+                if (parsedData.is_video) {
+                    document.getElementById('frame-indicator').innerText = `Frame ${index + 1} of ${frames.length}`;
+                }
+                
+                document.getElementById('original-img').src = data.original_image;
+                
+                // Both pipelines output the same ripeness map visualization, just varying classifications
+                origLabImg.src = ripenessData.orig_ripeness_image;
+                origHsvImg.src = ripenessData.orig_ripeness_image;
+                enhLabImg.src = ripenessData.enh_ripeness_image;
+                enhHsvImg.src = ripenessData.enh_ripeness_image;
+                
+                updateView();
+            }
+
+            function updateView() {
+                const data = frames[currentFrameIndex];
+                const ripenessData = data.ripeness;
+                const sit = sitSelect.value || 'sit1';
+                const currentData = ripenessData[sit];
+                
+                const classificationStyle = "font-size: 1.15rem; margin-top: 10px;";
+                const badgeStyle = "font-size: 1.15rem; padding: 5px 10px;";
+                const meanStyle = "font-size: 1.05rem; display: inline-block; margin-top: 5px;";
+
+                origLabText.innerHTML = `<div style="${classificationStyle}"><strong>Classification:</strong> <span class="badge bg-primary" style="${badgeStyle}">${currentData.orig_class_lab}</span></div><div class="text-muted" style="${meanStyle}">Mean a* = ${currentData.orig_lab.a.toFixed(2)}</div>`;
+                origHsvText.innerHTML = `<div style="${classificationStyle}"><strong>Classification:</strong> <span class="badge bg-success" style="${badgeStyle}">${currentData.orig_class_hsv}</span></div><div class="text-muted" style="${meanStyle}">Mean H = ${currentData.orig_hsv.h.toFixed(2)}</div>`;
+                
+                enhLabText.innerHTML = `<div style="${classificationStyle}"><strong>Classification:</strong> <span class="badge bg-primary" style="${badgeStyle}">${currentData.enh_class_lab}</span></div><div class="text-muted" style="${meanStyle}">Mean a* = ${currentData.enh_lab.a.toFixed(2)}</div>`;
+                enhHsvText.innerHTML = `<div style="${classificationStyle}"><strong>Classification:</strong> <span class="badge bg-success" style="${badgeStyle}">${currentData.enh_class_hsv}</span></div><div class="text-muted" style="${meanStyle}">Mean H = ${currentData.enh_hsv.h.toFixed(2)}</div>`;
+            }
+
+            sitSelect.addEventListener('change', updateView);
+
+            // Initial view
+            renderFrame(0);
+            
+            if (document.getElementById('btn-prev-frame')) {
+                document.getElementById('btn-prev-frame').addEventListener('click', () => {
+                    if (currentFrameIndex > 0) {
+                        renderFrame(currentFrameIndex - 1);
+                    }
+                });
+                
+                document.getElementById('btn-next-frame').addEventListener('click', () => {
+                    if (currentFrameIndex < frames.length - 1) {
+                        renderFrame(currentFrameIndex + 1);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

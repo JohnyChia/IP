@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Visualization Dashboard</title>
+    <link href="css/font-face.css" rel="stylesheet" media="all"/>
+    <link rel="preconnect" href="https://rsms.me/"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link href="vendor/fontawesome-7.3.1/css/all.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/bootstrap-5.3.8.min.css" rel="stylesheet" media="all"/>
+    <link href="css/theme.css" rel="stylesheet" media="all"/>
+    <link href="css/app.css" rel="stylesheet" media="all"/>
+</head>
+<body class="app">
+    <div class="page-wrapper">
+        <aside class="menu-sidebar" id="main-sidebar">
+          <div class="logo">
+              <a class="logo-link" href="index.html">
+                  <span class="logo-mark" aria-hidden="true" style="background: #4272d7; color: white; border-radius: 4px; padding: 0 8px;"><i class="fa-solid fa-apple-whole"></i></span>
+                  <span class="logo-text">Inspection System</span>
+              </a>
+          </div>
+          <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+              <ul class="list-unstyled navbar__list">
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-list-check"></i>INSPECTION
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-index"><a href="index.html">New Inspection</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-chart-pie"></i>ANALYSIS
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-surface"><a href="surface.html">Fruit Surface Detection</a></li>
+                        <li id="nav-ripeness"><a href="ripeness.html">Fruit Ripeness</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa-solid fa-square-poll-vertical"></i>RESULTS
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                        <li id="nav-viz" class="active"><a href="visualization.html">Visualization Dashboard</a></li>
+                    </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <div class="page-container">
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <div class="form-header">
+                                <h4>Fruit Inspection System Dashboard</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content" id="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        
+                        <div class="page-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <h1>Single-Image Real-time Visualization</h1>
+                                <p class="subtitle">Direct comparison of features extracted from the currently uploaded image.</p>
+                            </div>
+                            <button id="export-pdf-btn" class="btn btn-primary shadow-sm" style="background-color: #4272d7; border: none; font-weight: 500;">
+                                <i class="fa-solid fa-file-pdf"></i> Export Dashboard to PDF
+                            </button>
+                        </div>
+
+                        
+                        <h3 class="mb-4 text-primary border-bottom pb-2">Section 1: Fruit Surface Detection</h3>
+                        
+                        <div id="surfaceCarousel" class="carousel slide" data-bs-ride="carousel" style="padding: 0 50px;">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="card">
+                                        <div class="card-header">Situation 1: Foreground Extraction Ratio</div>
+                                        <div class="card-body" style="height: 400px;">
+                                            <canvas id="sit1-fg" style="max-height: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="card">
+                                        <div class="card-header">Situation 2: Edge Density</div>
+                                        <div class="card-body" style="height: 400px;">
+                                            <canvas id="sit2-edge" style="max-height: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="card">
+                                        <div class="card-header">Situation 3: Shape Descriptors (Algorithm 1 vs Algorithm 2)</div>
+                                        <div class="card-body" style="height: 400px;">
+                                            <canvas id="sit3-shape" style="max-height: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#surfaceCarousel" data-bs-slide="prev" style="width: 50px;">
+                                <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#surfaceCarousel" data-bs-slide="next" style="width: 50px;">
+                                <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        
+                        <h3 class="mb-4 mt-5 text-primary border-bottom pb-2">Section 2: Fruit Ripeness (LAB vs HSV)</h3>
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">LAB Color Space (Mean L, a, b)</div>
+                                    <div class="card-body">
+                                        <canvas id="ripe-lab-radar"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">HSV Color Space (Mean H, S, V)</div>
+                                    <div class="card-body">
+                                        <canvas id="ripe-hsv-radar"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="vendor/bootstrap-5.3.8.bundle.min.js"></script>
+    <script src="vendor/chartjs/chart.umd.js-4.5.1.min.js"></script>
+    <script>
+        // Custom plugin to draw white background on canvases for PDF export
+        const customCanvasBackgroundColor = {
+            id: 'customCanvasBackgroundColor',
+            beforeDraw: (chart, args, options) => {
+                const {ctx} = chart;
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = options.color || '#ffffff';
+                ctx.fillRect(0, 0, chart.width, chart.height);
+                ctx.restore();
+            }
+        };
+        Chart.register(customCanvasBackgroundColor);
+
+        let uiChartInstances = [];
+        let exportChartRegistry = {};
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const rawData = localStorage.getItem('inspection_results');
+            if (!rawData) {
+                alert("No recent inspection data found. Please upload an image first.");
+                return;
+            }
+            
+            const parsedData = JSON.parse(rawData);
+            const isVideo = parsedData.is_video === true;
+            
+            let frames = [];
+            if (isVideo) {
+                frames = parsedData.frames;
+                const header = document.querySelector('.page-header h1');
+                if (header) {
+                    header.innerHTML = `Video Inspection Visualization <span class="badge bg-info text-dark" style="font-size: 0.5em; vertical-align: middle;">${frames.length} Frames</span>`;
+                }
+                const subtitle = document.querySelector('.page-header .subtitle');
+                if (subtitle) {
+                    subtitle.innerText = "Frame-by-frame progression of extracted features.";
+                }
+            } else {
+                if (!parsedData.metrics) {
+                    alert("Metrics missing from payload. Ensure backend has been updated.");
+                    return;
+                }
+                frames = [parsedData];
+            }
+
+            // Dedicated PDF Chart Stage
+            const pdfStage = document.createElement('div');
+            pdfStage.id = 'pdf-chart-stage';
+            pdfStage.style.position = 'absolute';
+            pdfStage.style.left = '-10000px';
+            pdfStage.style.top = '0';
+            pdfStage.style.width = '1800px';
+            pdfStage.style.visibility = 'hidden';
+            document.body.appendChild(pdfStage);
+
+            function createDualChart(chartKey, canvasId, type, labels, datasets, chartTitle, yMax) {
+                const optionsBase = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { font: { size: 14 } } }
+                    }
+                };
+                
+                if (chartTitle) {
+                    optionsBase.plugins.title = { display: true, text: chartTitle, font: { size: 18 } };
+                }
+                
+                if (type === 'bar' || type === 'line') {
+                    optionsBase.scales = { 
+                        x: { ticks: { font: { size: 14, weight: 'bold' } } },
+                        y: { beginAtZero: true, ticks: { font: { size: 14, weight: 'bold' } } }
+                    };
+                    if (yMax !== undefined) optionsBase.scales.y.max = yMax;
+                } else if (type === 'radar') {
+                    optionsBase.scales = { 
+                        r: { 
+                            beginAtZero: true, 
+                            pointLabels: { font: { size: 14, weight: 'bold' } },
+                            ticks: { font: { size: 12 } }
+                        } 
+                    };
+                }
+
+                // 1. Create UI Chart
+                const uiCtx = document.getElementById(canvasId);
+                if (uiCtx) {
+                    const uiConfig = { type: type, data: { labels: labels, datasets: datasets }, options: JSON.parse(JSON.stringify(optionsBase)) };
+                    if (type === 'line') {
+                        uiConfig.data.datasets.forEach(ds => ds.tension = 0.1);
+                    }
+                    uiChartInstances.push(new Chart(uiCtx, uiConfig));
+                }
+
+                // 2. Create Export Chart
+                const exportContainer = document.createElement('div');
+                exportContainer.style.width = '1800px';
+                exportContainer.style.height = '1000px';
+                const exportCanvas = document.createElement('canvas');
+                exportContainer.appendChild(exportCanvas);
+                pdfStage.appendChild(exportContainer);
+
+                const exportConfig = { type: type, data: { labels: labels, datasets: datasets }, options: JSON.parse(JSON.stringify(optionsBase)) };
+                exportConfig.options.animation = false; // Disable animation so it renders instantly
+                exportConfig.options.plugins.customCanvasBackgroundColor = { color: '#ffffff' };
+                if (type === 'line') {
+                    exportConfig.data.datasets.forEach(ds => ds.tension = 0.1);
+                }
+                
+                exportChartRegistry[chartKey] = new Chart(exportCanvas, exportConfig);
+            }
+
+            if (!isVideo) {
+                // SINGLE IMAGE LOGIC
+                const m = frames[0].metrics;
+                
+                createDualChart('sit1', 'sit1-fg', 'bar', ['Original Pipelines', 'Enhanced Pipelines'], [
+                    { label: 'Color Thresholding (🔵)', data: [m.surface.sit1_orig_ct_fg, m.surface.sit1_enh_ct_fg], backgroundColor: '#4272d7' },
+                    { label: 'LAB K-Means (🟢)', data: [m.surface.sit1_orig_km_fg, m.surface.sit1_enh_km_fg], backgroundColor: '#28a745' }
+                ], '', 1.0);
+                
+                createDualChart('sit2', 'sit2-edge', 'bar', ['Original Pipelines', 'Enhanced Pipelines'], [
+                    { label: 'Morphological Watershed (🔵)', data: [m.surface.sit2_orig_w_edge, m.surface.sit2_enh_w_edge], backgroundColor: '#4272d7' },
+                    { label: 'Canny Edge Detection (🟢)', data: [m.surface.sit2_orig_c_edge, m.surface.sit2_enh_c_edge], backgroundColor: '#28a745' }
+                ]);
+                
+                createDualChart('sit3', 'sit3-shape', 'bar', ['Circularity', 'Solidity', 'Aspect Ratio'], [
+                    { label: 'Active Contour (🔵)', data: [m.surface.sit3_orig_circularity, m.surface.sit3_orig_solidity, m.surface.sit3_orig_aspect_ratio], backgroundColor: '#4272d7' },
+                    { label: 'Global Shape (🟢)', data: [m.surface.sit3_enh_circularity, m.surface.sit3_enh_solidity, m.surface.sit3_enh_aspect_ratio], backgroundColor: '#28a745' }
+                ]);
+                
+                createDualChart('lab', 'ripe-lab-radar', 'radar', ['Mean L', 'Mean a', 'Mean b'], [
+                    { label: 'Original Pipeline', data: [m.ripeness.orig_lab.l, m.ripeness.orig_lab.a, m.ripeness.orig_lab.b], borderColor: '#4272d7', backgroundColor: 'rgba(66, 114, 215, 0.2)' },
+                    { label: 'Enhanced Pipeline', data: [m.ripeness.enh_lab.l, m.ripeness.enh_lab.a, m.ripeness.enh_lab.b], borderColor: '#28a745', backgroundColor: 'rgba(40, 167, 69, 0.2)' }
+                ]);
+                
+                createDualChart('hsv', 'ripe-hsv-radar', 'radar', ['Mean H', 'Mean S', 'Mean V'], [
+                    { label: 'Original Pipeline', data: [m.ripeness.orig_hsv.h, m.ripeness.orig_hsv.s, m.ripeness.orig_hsv.v], borderColor: '#4272d7', backgroundColor: 'rgba(66, 114, 215, 0.2)' },
+                    { label: 'Enhanced Pipeline', data: [m.ripeness.enh_hsv.h, m.ripeness.enh_hsv.s, m.ripeness.enh_hsv.v], borderColor: '#28a745', backgroundColor: 'rgba(40, 167, 69, 0.2)' }
+                ]);
+
+            } else {
+                // VIDEO LOGIC
+                const labels = frames.map((_, i) => `Frame ${i + 1}`);
+                
+                createDualChart('sit1', 'sit1-fg', 'line', labels, [
+                    { label: 'Color Thresholding (🔵)', data: frames.map(f => f.metrics.surface.sit1_enh_ct_fg), borderColor: '#4272d7', backgroundColor: '#4272d7', fill: false },
+                    { label: 'LAB K-Means (🟢)', data: frames.map(f => f.metrics.surface.sit1_enh_km_fg), borderColor: '#28a745', backgroundColor: '#28a745', fill: false }
+                ], 'Enhanced Pipelines: Foreground Extraction Ratio over time', 1.0);
+                
+                createDualChart('sit2', 'sit2-edge', 'line', labels, [
+                    { label: 'Morphological Watershed (🔵)', data: frames.map(f => f.metrics.surface.sit2_enh_w_edge), borderColor: '#4272d7', backgroundColor: '#4272d7', fill: false },
+                    { label: 'Canny Edge Detection (🟢)', data: frames.map(f => f.metrics.surface.sit2_enh_c_edge), borderColor: '#28a745', backgroundColor: '#28a745', fill: false }
+                ], 'Enhanced Pipelines: Edge Density over time');
+                
+                createDualChart('sit3', 'sit3-shape', 'line', labels, [
+                    { label: 'Global Shape Circularity (🟢)', data: frames.map(f => f.metrics.surface.sit3_enh_circularity), borderColor: '#28a745', backgroundColor: '#28a745', fill: false }
+                ], 'Enhanced Global Shape: Circularity over time');
+                
+                createDualChart('lab', 'ripe-lab-radar', 'line', labels, [
+                    { label: 'Original LAB Mean a*', data: frames.map(f => f.metrics.ripeness.orig_lab.a), borderColor: '#4272d7', backgroundColor: '#4272d7', borderDash: [5, 5], fill: false },
+                    { label: 'Enhanced LAB Mean a*', data: frames.map(f => f.metrics.ripeness.enh_lab.a), borderColor: '#28a745', backgroundColor: '#28a745', fill: false }
+                ], 'Progression of a* value (Red/Green)');
+                
+                createDualChart('hsv', 'ripe-hsv-radar', 'line', labels, [
+                    { label: 'Original HSV Mean H', data: frames.map(f => f.metrics.ripeness.orig_hsv.h), borderColor: '#4272d7', backgroundColor: '#4272d7', borderDash: [5, 5], fill: false },
+                    { label: 'Enhanced HSV Mean H', data: frames.map(f => f.metrics.ripeness.enh_hsv.h), borderColor: '#28a745', backgroundColor: '#28a745', fill: false }
+                ], 'Progression of Hue (Color)');
+            }
+
+            // Ensure UI charts resize when carousel slide changes
+            const carousel = document.getElementById('surfaceCarousel');
+            if (carousel) {
+                carousel.addEventListener('slid.bs.carousel', function () {
+                    uiChartInstances.forEach(chart => {
+                        chart.resize();
+                    });
+                });
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.getElementById('export-pdf-btn').addEventListener('click', function () {
+            var btn = this;
+            
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                alert("Error: jsPDF library failed to load. Please check your internet connection.");
+                return;
+            }
+
+            var originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Generating PDF...';
+            btn.disabled = true;
+
+            // Wait 2 frames to ensure the browser has fully processed the UI state
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    try {
+                        const keys = ['sit1', 'sit2', 'sit3', 'lab', 'hsv'];
+                        for (let k of keys) {
+                            if (!exportChartRegistry[k]) {
+                                throw new Error(`Chart ${k} is not ready in registry.`);
+                            }
+                            const cvs = exportChartRegistry[k].canvas;
+                            console.log(`[PDF] ${k} dimensions: ${cvs.width}x${cvs.height}`);
+                            if (cvs.width === 0 || cvs.height === 0) {
+                                throw new Error(`Chart ${k} has 0x0 dimensions.`);
+                            }
+                        }
+
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF('p', 'mm', 'a4');
+                        const pageWidth = 210;
+                        const pageHeight = 297;
+                        const margin = 15;
+                        const contentWidth = pageWidth - (margin * 2);
+                        let currentY = 15;
+                        
+                        // Title
+                        doc.setFontSize(18);
+                        doc.setFont("helvetica", "bold");
+                        doc.text("Fruit Inspection System Dashboard", margin, currentY);
+                        currentY += 8;
+                        
+                        // Subtitle
+                        doc.setFontSize(12);
+                        doc.setFont("helvetica", "normal");
+                        let subtitle = document.querySelector('.page-header h1').innerText;
+                        subtitle = subtitle.replace(/\n/g, ' ').replace('Frames', 'Frames').trim();
+                        doc.text(`Inspection Type: ${subtitle}`, margin, currentY);
+                        currentY += 15;
+                        
+                        // Helper
+                        const addChartToPdf = (chartKey, title) => {
+                            const chart = exportChartRegistry[chartKey];
+                            const canvas = chart.canvas;
+                            
+                            // Calculate required height based on fixed content width (180mm) and canvas aspect ratio
+                            const ratio = canvas.height / canvas.width;
+                            const imgHeight = contentWidth * ratio;
+                            
+                            // Check page break (need room for title (10mm) + image + bottom padding (10mm))
+                            if (currentY + 10 + imgHeight + 10 > pageHeight - margin) {
+                                doc.addPage();
+                                currentY = 15;
+                            }
+                            
+                            doc.setFontSize(14);
+                            doc.setFont("helvetica", "bold");
+                            doc.text(title, margin, currentY);
+                            currentY += 8;
+                            
+                            console.log(`[PDF] Exporting chart ${chartKey}`);
+                            const imgData = canvas.toDataURL('image/png', 1.0);
+                            
+                            doc.addImage(imgData, 'PNG', margin, currentY, contentWidth, imgHeight);
+                            currentY += imgHeight + 15;
+                        };
+                        
+                        // Section 1
+                        doc.setFontSize(16);
+                        doc.setFont("helvetica", "bold");
+                        doc.setTextColor(66, 114, 215);
+                        doc.text("Section 1: Fruit Surface Detection", margin, currentY);
+                        doc.setTextColor(0, 0, 0);
+                        currentY += 10;
+                        
+                        addChartToPdf('sit1', "Situation 1: Foreground Extraction Ratio");
+                        addChartToPdf('sit2', "Situation 2: Edge Density");
+                        addChartToPdf('sit3', "Situation 3: Shape Descriptors");
+                        
+                        // Section 2
+                        if (currentY + 30 > pageHeight - margin) {
+                            doc.addPage();
+                            currentY = 15;
+                        }
+                        doc.setFontSize(16);
+                        doc.setFont("helvetica", "bold");
+                        doc.setTextColor(66, 114, 215);
+                        doc.text("Section 2: Fruit Ripeness (LAB vs HSV)", margin, currentY);
+                        doc.setTextColor(0, 0, 0);
+                        currentY += 10;
+                        
+                        addChartToPdf('lab', "LAB Color Space");
+                        addChartToPdf('hsv', "HSV Color Space");
+                        
+                        doc.save('Dashboard_Report.pdf');
+                        console.log("[PDF] Export complete.");
+                        
+                    } catch (err) {
+                        alert("PDF export failed: " + err.message);
+                        console.error("[PDF] Export Error:", err);
+                    } finally {
+                        btn.style.display = 'inline-block';
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+image_name,roi_count,valid_roi_count,segmentation_status,foreground_ratio,mean_L,mean_a,mean_b,predicted_ripeness,processing_time_s
+000d9c59687b509b_jpg.rf.c338360b3dfe1953a5d266ee861d7e79.jpg,3,2,Success,0.1273,101.7915,162.3731,140.4024,Overripe,0.0051
+0026df6bcaf93ac5_jpg.rf.510f06f5d706b8924f3a8a411211dcf8.jpg,2,2,Success,0.122,74.2109,101.8429,139.2999,Unripe,0.0044
+0048a9ad59d8ab79_jpg.rf.8a324bb752732a70e2bc846b44c96d19.jpg,2,1,Success,0.1974,181.627,140.3307,186.4029,Ripe,0.001
+0055f7e5bac0c8e1_jpg.rf.7bb1d953a097322150e11573b6e58e65.jpg,2,2,Success,0.9144,117.438,162.3255,181.4765,Overripe,0.0052
+00568c421d1592fa_jpg.rf.0d1f5010cce3b13ee245a6c5d616bf2a.jpg,3,3,Success,0.4768,210.7265,122.3401,186.1502,Ripe,0.0111

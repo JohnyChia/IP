@@ -1,0 +1,13 @@
+# UI_UX Cleanup Report (Before Deletion)
+
+## Unused Files Identified
+1. **HTML Pages**: `404.html`, `500.html`, `alert.html`, `badge.html`, `button.html`, `calendar.html`, `card.html`, `chart.html`, `data-table.html`, `docs.html`, `fontawesome.html`, `forget-pass.html`, `form.html`, `grid.html`, `inbox.html`, `index2.html`, `index3.html`, `index4.html`, `invoice.html`, `kanban.html`, `login.html`, `maintenance.html`, `map.html`, `modal.html`, `notifications.html`, `pricing.html`, `profile.html`, `progress-bar.html`, `register.html`, `switch.html`, `tab.html`, `table.html`, `typo.html`, `wizard.html`
+   - *Reason*: These are generic CoolAdmin template pages (business dashboards, tables, 404 pages) and are entirely unreferenced by `index.html` (which now serves as a single-page prototype for the Fruit Inspection System).
+2. **Vendor Directories**:
+   - `vendor/chartjs`: The Fruit Inspection prototype does not render any graphs.
+   - `vendor/fullcalendar-7.0.2`: The calendar is not used in the UI.
+
+## Proposed Action
+- Delete the unused HTML files.
+- Delete the `chartjs` and `fullcalendar-7.0.2` folders.
+- Retain all CSS and JS files for Bootstrap, FontAwesome, and vanilla-utils to ensure the main UI layout/responsiveness is safely preserved.

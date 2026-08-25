@@ -1,0 +1,23 @@
+# UI_UX Cleanup Report (After Deletion)
+
+## Files Removed
+1. **HTML Pages**: `404.html`, `500.html`, `alert.html`, `badge.html`, `button.html`, `calendar.html`, `card.html`, `chart.html`, `data-table.html`, `docs.html`, `fontawesome.html`, `forget-pass.html`, `form.html`, `grid.html`, `inbox.html`, `index2.html`, `index3.html`, `index4.html`, `invoice.html`, `kanban.html`, `login.html`, `maintenance.html`, `map.html`, `modal.html`, `notifications.html`, `pricing.html`, `profile.html`, `progress-bar.html`, `register.html`, `switch.html`, `tab.html`, `table.html`, `typo.html`, `wizard.html`
+2. **Vendor Directories**:
+   - `vendor/chartjs`
+   - `vendor/fullcalendar-7.0.2`
+
+## Files Retained
+- **HTML**: `index.html`, `index.cooladmin-backup.html`
+- **CSS**: `css/app.css`, `css/theme.css`, `css/font-face.css`
+- **JS**: `js/main-vanilla.js`, `js/vanilla-utils.js`, `js/bootstrap5-init.js`, `js/modern-plugins.js`
+- **Vendor**: `vendor/fontawesome-7.3.1`, `vendor/bootstrap-5.3.8.min.css`, `vendor/bootstrap-5.3.8.bundle.min.js`, `vendor/css-hamburgers`
+- **Images**: `images/` (kept intact to preserve avatar icons, logos, etc. referenced by Bootstrap or vanilla js).
+
+## Required Dependencies
+- Bootstrap 5
+- FontAwesome 7.3.1
+- Inter Font
+- `vanilla-utils.js` (for sidebar/navigation toggles)
+
+## Final Project Structure
+The `C:\IP\UI_UX` directory now contains exactly the assets required to run the single-page Fruit Inspection System Prototype, maintaining the exact styling and UI components without the bloat of an entire admin template.

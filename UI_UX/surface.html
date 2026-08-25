@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Fruit Surface Detection</title>
+    <link href="css/font-face.css" rel="stylesheet" media="all"/>
+    <link rel="preconnect" href="https://rsms.me/"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link href="vendor/fontawesome-7.3.1/css/all.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/bootstrap-5.3.8.min.css" rel="stylesheet" media="all"/>
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all"/>
+    <link href="css/theme.css" rel="stylesheet" media="all"/>
+    <link href="css/app.css" rel="stylesheet" media="all"/>
+    <style>
+      .preview-image {
+          max-width: 100%;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      .no-image-overlay {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 400px;
+          background: #f8f9fa;
+          border-radius: 8px;
+          border: 2px dashed #ccc;
+      }
+    </style>
+  </head>
+  <body class="app">
+    <div class="page-wrapper">
+      
+      
+      <aside class="menu-sidebar" id="main-sidebar">
+        <div class="logo">
+            <a class="logo-link" href="index.html">
+                <span class="logo-mark" aria-hidden="true" style="background: #4272d7; color: white; border-radius: 4px; padding: 0 8px;"><i class="fa-solid fa-apple-whole"></i></span>
+                <span class="logo-text">Inspection System</span>
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+                    <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-list-check"></i>INSPECTION
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-index"><a href="index.html">New Inspection</a></li>
+                  </ul>
+              </li>
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-chart-pie"></i>ANALYSIS
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-surface"><a href="surface.html">Fruit Surface Detection</a></li>
+                      <li id="nav-ripeness"><a href="ripeness.html">Fruit Ripeness</a></li>
+                  </ul>
+              </li>
+              <li class="has-sub">
+                  <a class="js-arrow" href="#">
+                      <i class="fa-solid fa-square-poll-vertical"></i>RESULTS
+                  </a>
+                  <ul class="list-unstyled navbar__sub-list js-sub-list" style="display: block;">
+                      <li id="nav-viz"><a href="visualization.html">Visualization Dashboard</a></li>
+                  </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      
+      
+      <div class="page-container">
+        
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <div class="form-header">
+                    <h4>Fruit Inspection System Dashboard</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        
+        <main class="main-content" id="main-content">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              
+              <div class="page-header">
+                  <div>
+                      <h1>Fruit Surface Detection</h1>
+                      <p class="subtitle">Comparing boundary detection algorithms across complex surface situations.</p>
+                  </div>
+              </div>
+
+              
+              <div id="no-image-alert" style="display: none;">
+                  <div class="no-image-overlay">
+                      <i class="fa-solid fa-triangle-exclamation mb-3 text-warning" style="font-size: 48px;"></i>
+                      <h3>No Image Available</h3>
+                      <p class="text-muted">Please go back and upload an image to inspect.</p>
+                      <a href="index.html" class="btn btn-primary mt-3">Start New Inspection</a>
+                  </div>
+              </div>
+                            <div id="video-controls" class="alert alert-info d-flex justify-content-between align-items-center" style="display: none !important; margin-bottom: 20px;">
+                            <div>
+                                <strong><i class="fa-solid fa-film"></i> Video Processing Results</strong>
+                                <p class="mb-0" style="font-size: 0.9em;">Displaying sampled frames from the uploaded video.</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <button id="btn-prev-frame" class="btn btn-sm btn-outline-primary me-2"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                                <span id="frame-indicator" class="fw-bold me-2">Frame 1 of 1</span>
+                                <button id="btn-next-frame" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-chevron-right"></i> Next</button>
+                            </div>
+                        </div>
+                        <div class="row" id="module-content" style="display: none;">
+                  
+                  <div class="row mb-4">
+                      <div class="col-md-12">
+                          <div class="card">
+                              <div class="card-body d-flex align-items-center justify-content-between">
+                                  <h4 class="mb-0">Select Defect Situation:</h4>
+                                  <select class="form-select w-50" id="situation-select">
+                                      <option value="sit1">Situation 1 (LAB K-Means vs Color Thresholding)</option>
+                                      <option value="sit2" selected>Situation 2 (Morphological Watershed vs Canny)</option>
+                                      <option value="sit3">Situation 3 (Active Contour vs Otsu)</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  
+                  <div class="row">
+                      <div class="col-md-8 mx-auto">
+                          <div class="m-card text-center">
+                              <header class="m-card__header" style="justify-content: center;">
+                                  <h5 class="m-card__title">Original Image</h5>
+                              </header>
+                              <img id="original-img" class="preview-image mt-3 mb-3" src="">
+                          </div>
+                      </div>
+                  </div>
+
+                  <h4 class="mt-5 mb-4 text-center text-muted">--- Original Algorithms ---</h4>
+                  
+                  <div class="row mt-4">
+                      <div class="col-md-6">
+                          <div class="m-card text-center" style="border-top: 4px solid #4272d7; height: 100%;">
+                              <header class="m-card__header" style="justify-content: center;">
+                                  <h5 class="m-card__title" id="orig-alg1-title"><span id="alg1-name-orig">Algorithm 1</span> (Original)</h5>
+                              </header>
+                              <img id="orig-alg1-img" class="preview-image mt-3 mb-3" src="">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="m-card text-center" style="border-top: 4px solid #28a745; height: 100%;">
+                              <header class="m-card__header" style="justify-content: center;">
+                                  <h5 class="m-card__title" id="orig-alg2-title"><span id="alg2-name-orig">Algorithm 2</span> (Original)</h5>
+                              </header>
+                              <img id="orig-alg2-img" class="preview-image mt-3 mb-3" src="">
+                          </div>
+                      </div>
+                  </div>
+
+                  <h4 class="mt-5 mb-4 text-center text-primary">--- Result Enhancement ---</h4>
+                  
+                  <div class="row mt-4">
+                      <div class="col-md-6">
+                          <div class="m-card text-center" style="border-top: 4px solid #4272d7; height: 100%;">
+                              <header class="m-card__header" style="justify-content: center;">
+                                  <h5 class="m-card__title" id="enh-alg1-title"><span id="alg1-name-enh">Algorithm 1</span> (Enhanced)</h5>
+                              </header>
+                              <img id="enh-alg1-img" class="preview-image mt-3 mb-3" src="">
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="m-card text-center" style="border-top: 4px solid #28a745; height: 100%;">
+                              <header class="m-card__header" style="justify-content: center;">
+                                  <h5 class="m-card__title" id="enh-alg2-title"><span id="alg2-name-enh">Algorithm 2</span> (Enhanced)</h5>
+                              </header>
+                              <img id="enh-alg2-img" class="preview-image mt-3 mb-3" src="">
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
+
+              
+              <div class="row" style="margin-top: 28px;">
+                  <div class="col-md-12">
+                      <div class="copyright">
+                          <p>Fruit Inspection System Prototype &copy; 2026</p>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    
+    <script src="js/vanilla-utils.js"></script>
+    <script src="vendor/bootstrap-5.3.8.bundle.min.js"></script>
+    <script src="vendor/chartjs/chart.umd.js-4.5.1.min.js"></script>
+    
+    <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              const resultsJson = localStorage.getItem('inspection_results');
+              if (!resultsJson) {
+                  document.getElementById('no-image-alert').style.display = 'block';
+                  return;
+              }
+              
+              let currentFrameIndex = 0;
+              let frames = [];
+              const parsedData = JSON.parse(resultsJson);
+              
+              if (parsedData.is_video) {
+                  frames = parsedData.frames;
+                  document.getElementById('video-controls').style.setProperty('display', 'flex', 'important');
+              } else {
+                  frames = [parsedData];
+              }
+              
+              document.getElementById('module-content').style.display = 'block';
+              
+              function renderFrame(index) {
+                  currentFrameIndex = index;
+                  const results = frames[index];
+                  const surfaceData = results.surface;
+                  
+                  if (parsedData.is_video) {
+                      document.getElementById('frame-indicator').innerText = `Frame ${index + 1} of ${frames.length}`;
+                  }
+                  
+                  document.getElementById('original-img').src = results.original_image;
+  
+                  const currentSit = document.getElementById('situation-select').value || 'sit1';
+                  const data = surfaceData[currentSit];
+                  
+                  document.getElementById('alg1-name-orig').innerText = data.alg1_name;
+                  document.getElementById('alg2-name-orig').innerText = data.alg2_name;
+                  document.getElementById('orig-alg1-img').src = data.orig_alg1_img;
+                  document.getElementById('orig-alg2-img').src = data.orig_alg2_img;
+                  document.getElementById('alg1-name-enh').innerText = data.alg1_name;
+                  document.getElementById('alg2-name-enh').innerText = data.alg2_name;
+                  document.getElementById('enh-alg1-img').src = data.enh_alg1_img;
+                  document.getElementById('enh-alg2-img').src = data.enh_alg2_img;
+              }
+              
+              renderFrame(0);
+              
+              document.getElementById('situation-select').addEventListener('change', function(e) {
+                  renderFrame(currentFrameIndex);
+              });
+              
+              if (document.getElementById('btn-prev-frame')) {
+                  document.getElementById('btn-prev-frame').addEventListener('click', () => {
+                      if (currentFrameIndex > 0) {
+                          renderFrame(currentFrameIndex - 1);
+                      }
+                  });
+                  
+                  document.getElementById('btn-next-frame').addEventListener('click', () => {
+                      if (currentFrameIndex < frames.length - 1) {
+                          renderFrame(currentFrameIndex + 1);
+                      }
+                  });
+              }
+          });
+    </script>
+  </body>
+</html>
